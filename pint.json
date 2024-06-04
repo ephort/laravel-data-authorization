@@ -1,0 +1,9 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "@PSR12": true,
+        "concat_space": {
+            "spacing": "one"
+        }
+    }
+}

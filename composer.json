@@ -1,0 +1,88 @@
+{
+    "name": "ephort/laravel-data-authorization",
+    "description": "Add authorization to your data",
+    "keywords": [
+        "ephort",
+        "laravel",
+        "laravel-data-authorization",
+        "laravel-data"
+    ],
+    "homepage": "https://github.com/ephort/laravel-data-authorization",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Peter Brinck",
+            "email": "peter@ephort.dk",
+            "role": "Senior Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "illuminate/contracts": "^10.0||^11.0",
+        "spatie/laravel-data": "^4.6",
+        "spatie/laravel-package-tools": "^1.16",
+        "spatie/laravel-typescript-transformer": "^2.4"
+    },
+    "require-dev": {
+        "larastan/larastan": "^2.9",
+        "laravel/pint": "^1.14",
+        "nunomaduro/collision": "^8.1.1||^7.10.0",
+        "orchestra/testbench": "^9.0.0||^8.22.0",
+        "pestphp/pest": "^2.34",
+        "pestphp/pest-plugin-arch": "^2.7",
+        "pestphp/pest-plugin-laravel": "^2.3",
+        "phpstan/extension-installer": "^1.3",
+        "phpstan/phpstan-deprecation-rules": "^1.1",
+        "phpstan/phpstan-phpunit": "^1.3",
+        "spatie/laravel-ray": "^1.35"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ephort\\LaravelDataAuthorization\\": "src/",
+            "Ephort\\LaravelDataAuthorization\\Database\\Factories\\": "database/factories/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ephort\\LaravelDataAuthorization\\Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@composer run prepare",
+        "clear": "@php vendor/bin/testbench package:purge-laravel-data-authorization --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": [
+            "@composer run prepare",
+            "@php vendor/bin/testbench workbench:build --ansi"
+        ],
+        "start": [
+            "Composer\\Config::disableProcessTimeout",
+            "@composer run build",
+            "@php vendor/bin/testbench serve"
+        ],
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ephort\\LaravelDataAuthorization\\LaravelDataAuthorizationServiceProvider"
+            ],
+            "aliases": {
+                "LaravelDataAuthorization": "Ephort\\LaravelDataAuthorization\\Facades\\LaravelDataAuthorization"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

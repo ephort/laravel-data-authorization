@@ -1,0 +1,5 @@
+{
+id: number;
+text: string;
+authorization: { view: boolean; update: boolean; }
+}
